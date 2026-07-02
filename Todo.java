@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Todo {
     public static void main(String[] args) {
         String[] tasks = new String[100]; //タスク　（最大100件）
+        boolean[] done = new boolean[100]; //
         int count = 0;                    //件数
         Scanner sc = new Scanner(System.in);
         while (true) {
