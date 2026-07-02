@@ -15,6 +15,7 @@ public class Todo {
             int menu = sc.nextInt();
             if (menu == 0) {
                 System.out.println("終了します。");
+                break;
             } else if (menu == 1) {
                 count = add(tasks, done, count, sc);
             } else if (menu == 2) {
@@ -35,4 +36,18 @@ public class Todo {
     }
 
     //一覧
+    static void list(String[] tasks, boolean[] done, int count){
+        if(count == 0){
+            System.out.println("タスクはありません。");
+        }else{
+            for(int i=0;i<count;i++){
+                String mark;
+                if(done[i] == true){
+                    mark = "✓";
+                }else{
+                    mark = " ";
+                }System.out.println((i+1) + ". [" + mark + "]" + tasks[i]);
+            }
+        }
+    }
 }
