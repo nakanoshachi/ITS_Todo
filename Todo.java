@@ -32,13 +32,17 @@ public class Todo {
 
     // 追加
     static int add(String[] tasks, boolean[] done, int count, Scanner sc) {
+        if (count == 100){
+            System.out.println("これ以上追加できません（100件まで）");
+            return count;
+        }
         System.out.print("やること > ");
         String t = sc.nextLine();
         tasks[count] = t; // ヒント：入力した t を配列に入れる
         done[count] = false; // ヒント：追加した直後は未完了
         count++; // ヒント：件数を1増やす
         System.out.println("追加しました");
-        return count + 1;
+        return count;
     }
 
     // 一覧
@@ -46,15 +50,18 @@ public class Todo {
         if (count == 0) {
             System.out.println("タスクはありません。");
         } else {
+            int notDone = 0;
             for (int i = 0; i < count; i++) {
                 String mark;
                 if (done[i] == true) {
                     mark = "✓";
                 } else {
                     mark = " ";
+                    notDone++;
                 }
                 System.out.println((i + 1) + ". [" + mark + "]" + tasks[i]);
             }
+            System.out.println("未完了" + notDone + " 件 / 全 " + count + "件");
         }
     }
 
@@ -62,7 +69,6 @@ public class Todo {
     static void complete(boolean[] done, int count, Scanner sc) {
         System.out.print("完了する番号 > ");
         int n = sc.nextInt();
-        sc.nextInt();
         if (n >= 1 && n <= count) {
             done[n - 1] = true;
             // ヒント：done の n-1 番目を完了にする
