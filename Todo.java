@@ -37,7 +37,7 @@ public class Todo {
             return count;
         }
         System.out.print("やること > ");
-        String t = sc.nextLine();
+        String t = sc.next();
         tasks[count] = t; // ヒント：入力した t を配列に入れる
         done[count] = false; // ヒント：追加した直後は未完了
         count++; // ヒント：件数を1増やす
