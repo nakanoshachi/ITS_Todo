@@ -22,9 +22,11 @@ public class Todo {
             } else if (menu == 2) {
                 list(tasks, done, count);
             } else if (menu == 3) {
-
+                complete(done, count, sc);
+            } else if (menu == 4) {
+                count = delete(tasks, done, count, sc);
             }
-            // 3:完了 / 4:削除 は第10回
+
         }
     }
 
@@ -62,11 +64,32 @@ public class Todo {
         int n = sc.nextInt();
         sc.nextInt();
         if (n >= 1 && n <= count) {
-            done[n-1] = true;
+            done[n - 1] = true;
             // ヒント：done の n-1 番目を完了にする
             System.out.println("完了にしました");
         } else {
             System.out.println("その番号はありません");
         }
+    }
+
+    // 削除
+    static int delete(String[] tasks, boolean[] done, int count, Scanner sc) {
+        System.out.print("削除する番号 > ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        if (n >= 1 && n <= count) {
+            for (int i = n - 1; i < count-1; i++) { // ヒント：詰める範囲
+                // ヒント：1つ後ろを前へ
+                tasks[i] = tasks[i+1];
+                done[i] = done[i+1];
+            }
+            count--;
+            System.out.println("削除しました");
+        } else {
+            System.out.println("その番号はありません");
+        }
+        return count;
+        // ヒント：新しい count を返す
+
     }
 }
