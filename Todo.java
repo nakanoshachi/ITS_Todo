@@ -33,11 +33,14 @@ public class Todo {
     // 追加
     static int add(String[] tasks, boolean[] done, int count, Scanner sc) {
         if (count == 100){
-            System.out.println("これ以上追加できません（100件まで）");
+            System.out.println("これ以上追加できません。（100件まで）");
             return count;
         }
         System.out.print("やること > ");
         String t = sc.next();
+        if (t.equals("")){
+            System.out.println("空のタスクは追加できません。");
+        }
         tasks[count] = t; // ヒント：入力した t を配列に入れる
         done[count] = false; // ヒント：追加した直後は未完了
         count++; // ヒント：件数を1増やす
