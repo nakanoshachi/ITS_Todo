@@ -11,7 +11,7 @@ public class Todo {
 
         while (true) {
             // メニューを表示して番号を読む
-            System.out.println("1:追加  2:一覧  3:完了  4:削除  5:編集  0:終了");
+            System.out.println("1:追加  2:一覧  3:完了  4:削除  5:編集  6:完了済み削除  0:終了");
             System.out.print("番号を入力 > ");
             int menu = sc.nextInt();
             if (menu == 0) {
@@ -27,6 +27,8 @@ public class Todo {
                 count = delete(tasks, done, count, sc);
             } else if (menu == 5) {
                 edit(tasks, count, sc);
+            } else if (menu == 6) {
+                deleteDone(tasks, done, count);
             }
 
         }
@@ -108,14 +110,28 @@ public class Todo {
         // ヒント：新しい count を返す
     }
 
-    //　編集
+    // 編集
     static void edit(String[] tasks, int count, Scanner sc) {
         System.out.print("編集する番号 > ");
         int n = sc.nextInt();
         if (n >= 1 && n <= count) {
             System.out.print("新しい内容 > ");
-            tasks[n-1] = sc.nextLine();
+            tasks[n - 1] = sc.nextLine();
             System.out.println("変更しました");
         }
+    }
+
+    // 完了済み削除
+    static int deleteDone(String[] tasks, boolean[] done, int count) {
+        for (int i = count - 1; i >= 0; i--) {
+            if (done[i] == true) {
+                for (int j = i; j < count - 1; j++) {
+                    tasks[j] = tasks[j + 1];
+                    done[j] = done[j + 1];
+                }
+                count--;
+            }
+        }
+        return count;
     }
 }
