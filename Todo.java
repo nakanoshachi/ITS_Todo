@@ -7,7 +7,7 @@ public class Todo {
         String[] tasks = new String[100]; // タスク （最大100件）
         boolean[] done = new boolean[100]; //
         int count = 0; // 件数
-        int[] priority = new int[100]; // 優先度　1=高 2=中 3=低
+        int[] priority = new int[100]; // 優先度 1=高 2=中 3=低
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -29,7 +29,7 @@ public class Todo {
             } else if (menu == 5) {
                 edit(tasks, count, sc);
             } else if (menu == 6) {
-                deleteDone(tasks, done, count, priority);
+                count = deleteDone(tasks, done, count, priority);
             } else if (menu == 7) {
                 sortUndone(tasks, done, count, priority);
             } else if (menu == 8) {
@@ -54,14 +54,14 @@ public class Todo {
 
         System.out.print("優先度 > ");
         int p = sc.nextInt();
-        if(p!=1&&p!=2&&p!=3){
+        if (p != 1 && p != 2 && p != 3) {
             System.out.println("123いずれかの数を入力してください。");
             return count;
         }
 
         tasks[count] = t; // ヒント：入力した t を配列に入れる
         done[count] = false; // ヒント：追加した直後は未完了
-        priority[count]=p;
+        priority[count] = p;
         count++; // ヒント：件数を1増やす
         System.out.println("追加しました");
         return count;
@@ -82,10 +82,13 @@ public class Todo {
                     notDone++;
                 }
                 String p = "";
-                if(priority[i]==1) p="高";
-                if(priority[i]==2) p="中";
-                if(priority[i]==3) p="低";
-                System.out.println((i + 1) + ". [" + mark + "]" + tasks[i]+",優先度： "+ p);
+                if (priority[i] == 1)
+                    p = "高";
+                if (priority[i] == 2)
+                    p = "中";
+                if (priority[i] == 3)
+                    p = "低";
+                System.out.println((i + 1) + ". [" + mark + "]" + tasks[i] + ",優先度： " + p);
             }
             System.out.println("未完了" + notDone + " 件 / 全 " + count + "件");
         }
@@ -119,7 +122,7 @@ public class Todo {
                 // ヒント：1つ後ろを前へ
                 tasks[i] = tasks[i + 1];
                 done[i] = done[i + 1];
-                priority[i]=priority[i+1];
+                priority[i] = priority[i + 1];
             }
             count--;
             System.out.println("削除しました");
@@ -148,7 +151,7 @@ public class Todo {
                 for (int j = i; j < count - 1; j++) {
                     tasks[j] = tasks[j + 1];
                     done[j] = done[j + 1];
-                    priority[j]=priority[j+1];
+                    priority[j] = priority[j + 1];
                 }
                 count--;
             }
@@ -178,12 +181,12 @@ public class Todo {
     }
 
     // キーワード検索
-    static void search(String[] tasks, int count, Scanner sc){
+    static void search(String[] tasks, int count, Scanner sc) {
         System.out.print("検索語 > ");
         String key = sc.next();
-        for(int i=0;i<count;i++){
-            if(tasks[i].contains(key)){
-                System.out.println((i+1)+". "+tasks[i]);
+        for (int i = 0; i < count; i++) {
+            if (tasks[i].contains(key)) {
+                System.out.println((i + 1) + ". " + tasks[i]);
             }
         }
     }
