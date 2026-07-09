@@ -11,7 +11,7 @@ public class Todo {
 
         while (true) {
             // メニューを表示して番号を読む
-            System.out.println("1:追加  2:一覧  3:完了  4:削除  5:編集  6:完了済み削除  7:並び替え  0:終了");
+            System.out.println("1:追加  2:一覧  3:完了  4:削除  5:編集  6:完了済み削除  7:並び替え  8:検索  0:終了");
             System.out.print("番号を入力 > ");
             int menu = sc.nextInt();
             if (menu == 0) {
@@ -31,6 +31,8 @@ public class Todo {
                 deleteDone(tasks, done, count);
             } else if (menu == 7) {
                 sortUndone(tasks, done, count);
+            } else if (menu == 8) {
+                search(tasks, count, sc);
             }
         }
     }
@@ -149,6 +151,17 @@ public class Todo {
                     done[j] = done[j + 1];
                     done[j + 1] = dn;
                 }
+            }
+        }
+    }
+
+    // キーワード検索
+    static void search(String[] tasks, int count, Scanner sc){
+        System.out.print("検索語 > ");
+        String key = sc.nextLine();
+        for(int i=0;i<count;i++){
+            if(tasks[i].contains(key)){
+                System.out.println((i+1)+". "+tasks[i]);
             }
         }
     }
