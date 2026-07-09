@@ -11,7 +11,7 @@ public class Todo {
 
         while (true) {
             // メニューを表示して番号を読む
-            System.out.println("1:追加  2:一覧  3:完了  4:削除  5:編集  6:完了済み削除  0:終了");
+            System.out.println("1:追加  2:一覧  3:完了  4:削除  5:編集  6:完了済み削除  7:並び替え  0:終了");
             System.out.print("番号を入力 > ");
             int menu = sc.nextInt();
             if (menu == 0) {
@@ -29,8 +29,9 @@ public class Todo {
                 edit(tasks, count, sc);
             } else if (menu == 6) {
                 deleteDone(tasks, done, count);
+            } else if (menu == 7) {
+                sortUndone(tasks, done, count);
             }
-
         }
     }
 
@@ -133,5 +134,22 @@ public class Todo {
             }
         }
         return count;
+    }
+
+    // 並び替え未完了上
+    static void sortUndone(String[] tasks, boolean[] done, int count) {
+        for (int i = 0; i < count; i++) {
+            for (int j = 0; j < count - 1; j++) {
+                if (done[j] == true && done[j + 1] == false) {
+                    String ts = tasks[j];
+                    tasks[j] = tasks[j + 1];
+                    tasks[j + 1] = ts;
+
+                    boolean dn = done[j];
+                    done[j] = done[j + 1];
+                    done[j + 1] = dn;
+                }
+            }
+        }
     }
 }
