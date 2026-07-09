@@ -180,7 +180,7 @@ public class Todo {
     // キーワード検索
     static void search(String[] tasks, int count, Scanner sc){
         System.out.print("検索語 > ");
-        String key = sc.nextLine();
+        String key = sc.next();
         for(int i=0;i<count;i++){
             if(tasks[i].contains(key)){
                 System.out.println((i+1)+". "+tasks[i]);
