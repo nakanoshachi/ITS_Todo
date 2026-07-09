@@ -32,13 +32,13 @@ public class Todo {
 
     // 追加
     static int add(String[] tasks, boolean[] done, int count, Scanner sc) {
-        if (count == 100){
+        if (count == 100) {
             System.out.println("これ以上追加できません。（100件まで）");
             return count;
         }
         System.out.print("やること > ");
         String t = sc.next();
-        if (t.equals("")){
+        if (t.equals("")) {
             System.out.println("空のタスクは追加できません。");
         }
         tasks[count] = t; // ヒント：入力した t を配列に入れる
@@ -73,9 +73,15 @@ public class Todo {
         System.out.print("完了する番号 > ");
         int n = sc.nextInt();
         if (n >= 1 && n <= count) {
-            done[n - 1] = true;
-            // ヒント：done の n-1 番目を完了にする
-            System.out.println("完了にしました");
+            if (done[n - 1] == false) {
+                done[n - 1] = true;
+                // ヒント：done の n-1 番目を完了にする
+                System.out.println("完了にしました");
+            }else{
+                done[n-1] = false;
+                System.out.println("未完了にしました");
+            }
+
         } else {
             System.out.println("その番号はありません");
         }
@@ -87,10 +93,10 @@ public class Todo {
         int n = sc.nextInt();
         sc.nextLine();
         if (n >= 1 && n <= count) {
-            for (int i = n - 1; i < count-1; i++) { // ヒント：詰める範囲
+            for (int i = n - 1; i < count - 1; i++) { // ヒント：詰める範囲
                 // ヒント：1つ後ろを前へ
-                tasks[i] = tasks[i+1];
-                done[i] = done[i+1];
+                tasks[i] = tasks[i + 1];
+                done[i] = done[i + 1];
             }
             count--;
             System.out.println("削除しました");
