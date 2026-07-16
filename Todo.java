@@ -37,7 +37,7 @@ public class Todo {
             } else if (menu == 8) {
                 search(tasks, count, sc);
             } else if (menu == 9) {
-                save(tasks, done, count);
+                save(tasks, done, priority, count);
             }
         }
     }
@@ -196,11 +196,11 @@ public class Todo {
     }
 
     // せーぶろーど
-    static void save(String[] tasks, boolean[] done, int count) {
+    static void save(String[] tasks, boolean[] done, int[] priority, int count) {
         try {
             PrintWriter pw = new PrintWriter(new File("tasks.txt"));
             for (int i = 0; i < count; i++) {
-                pw.println(done[i] + tasks[i]);
+                pw.println(done[i] + tasks[i] + priority[i]);
             }
             pw.close();
         } catch (Exception e) {
