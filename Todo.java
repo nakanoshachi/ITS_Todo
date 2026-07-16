@@ -1,5 +1,7 @@
 
 // Todo.java;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Todo {
@@ -12,7 +14,7 @@ public class Todo {
 
         while (true) {
             // メニューを表示して番号を読む
-            System.out.println("1:追加  2:一覧  3:完了  4:削除  5:編集  6:完了済み削除  7:並び替え  8:検索  0:終了");
+            System.out.println("1:追加  2:一覧  3:完了  4:削除  5:編集  6:完了済み削除  7:並び替え  8:検索  9:保存  0:終了");
             System.out.print("番号を入力 > ");
             int menu = sc.nextInt();
             if (menu == 0) {
@@ -34,6 +36,8 @@ public class Todo {
                 sortUndone(tasks, done, count, priority);
             } else if (menu == 8) {
                 search(tasks, count, sc);
+            } else if (menu == 9) {
+                save(tasks, done, count);
             }
         }
     }
@@ -188,6 +192,19 @@ public class Todo {
             if (tasks[i].contains(key)) {
                 System.out.println((i + 1) + ". " + tasks[i]);
             }
+        }
+    }
+
+    // せーぶろーど
+    static void save(String[] tasks, boolean[] done, int count) {
+        try {
+            PrintWriter pw = new PrintWriter(new File("tasks.txt"));
+            for (int i = 0; i < count; i++) {
+                pw.println(done[i] + tasks[i]);
+            }
+            pw.close();
+        } catch (Exception e) {
+            System.out.println("保存に失敗しました");
         }
     }
 }
